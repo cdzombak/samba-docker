@@ -1,0 +1,25 @@
+---
+version: "3"
+
+services:
+  samba:
+    container_name: samba
+    image: cdzombak/samba-docker:4.19.3
+    hostname: mynas
+    network_mode: host
+    restart: always
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 32768
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - /etc/group:/etc/group:ro
+      - ./10-tz.sh:/etc/cont-init.d/10-tz.sh:ro
+      - ./70-smbusers.sh:/etc/cont-init.d/70-smbusers.sh:ro
+      - ./smb.conf:/usr/local/samba/etc/smb.conf:ro
+      - /var/log/samba-docker:/usr/local/samba/var/log
+      - /home/mysystemuser:/home/mysystemuser
+      - /mnt/storage/general:/mnt/storage/general
+      - /mnt/storage/iCloud-Drive-Mirror:/mnt/storage/iCloud-Drive-Mirror:ro
