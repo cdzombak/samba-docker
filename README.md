@@ -1,15 +1,10 @@
 # samba-docker
 
-> [!WARNING]
-> This is a work in progress. The configuration published here does not exactly match the working config on my NAS, documentation is incomplete, and prebuilt Docker images are not available.
->
-> See [TODO.md](https://github.com/cdzombak/samba-docker/blob/main/TODO.md) in this repository.
-
-Up-to-date Samba Docker image optimized for NAS file sharing with full macOS Spotlight support.
+Up-to-date Samba Docker image optimized for NAS file sharing with full macOS Spotlight support via Elasticsearch integration.
 
 ## Configuration & Usage
 
-tk
+TK
 
 ### Using `testparm`
 
@@ -43,13 +38,13 @@ This runs `smbd` in the "realtime" IO class, with priority `1` (the possible pri
 
 ### Elasticsearch & FSCrawler (for Spotlight support)
 
-tk
+TK
 
 also TK: cpu shares for the ES stuff; and (io)nice values for the same.
 
 ## Monitoring with Netdata
 
-tk
+TK
 
 ## Migrating away from system Samba
 
@@ -61,11 +56,11 @@ apt remove smbclient samba samba-common && apt autoremove
 
 ## See Also
 
-tk: raindrop bookmarks
+TK: raindrop bookmarks
 
 ### Samba
 
-tk: samba docs in general: smbd, conf, build, general wiki refs
+TK: samba docs in general: smbd, conf, build, general wiki refs
 
 - [`smb.conf` reference](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html)
 - [`smbd` reference](https://www.samba.org/samba/docs/current/man-html/smbd.8.html)
@@ -79,8 +74,7 @@ tk: samba docs in general: smbd, conf, build, general wiki refs
 
 n.b. Elasticsearch 8.9.0 and newer **are not compatible with Samba**.
 
-tk: spotlight, es,
-indexers, samba bugs
+TK: spotlight, es, indexers, samba bugs
 
 - https://wiki.samba.org/index.php/Spotlight_with_Elasticsearch_Backend
 - https://bugzilla.samba.org/show_bug.cgi?id=15511
