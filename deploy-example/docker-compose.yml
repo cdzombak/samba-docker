@@ -2,7 +2,7 @@
 services:
   samba:
     container_name: samba
-    image: cdzombak/samba-docker:4.19.3
+    image: cdzombak/samba-docker:4.20.1
     hostname: mynas
     network_mode: host
     restart: always

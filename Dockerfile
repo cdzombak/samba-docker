@@ -1,7 +1,7 @@
-FROM ubuntu:jammy
-ARG PROJECT_VERSION=4.19.3
-ARG SAMBA_VERSION=4.19.3
+FROM ubuntu:22.04
+ARG SAMBA_VERSION=4.20.1
 ARG S6_OVERLAY_VER=3.1.6.2
+ARG PROJECT_VERSION=4.20.1
 ARG S6_OVERLAY_ARCH=x86_64 # aarch64, x86_64
 # https://github.com/just-containers/s6-overlay#which-architecture-to-use-depending-on-your-targetarch
 # ^ is necessary because s6-overlay maintainer is overtly hostile
@@ -57,4 +57,5 @@ LABEL org.opencontainers.image.version="${PROJECT_VERSION}"
 LABEL org.opencontainers.image.licenses="GPL-3.0-or-later"
 LABEL org.opencontainers.image.title="samba-docker"
 LABEL org.opencontainers.image.description="Up-to-date Samba Docker image optimized for NAS file sharing with full macOS Spotlight support"
+
 # n.b. Elasticsearch 8.9.0 and newer **are not compatible with Samba**.
