@@ -13,15 +13,51 @@ tk
 
 ### Using `testparm`
 
-With your `docker-compose.yml` configured, you can use [`testparm`](https://www.samba.org/samba/docs/current/man-html/testparm.1.html) as follows to check your `smb.conf`:
+With your `docker-compose.yml` set up, you can use [`testparm`](https://www.samba.org/samba/docs/current/man-html/testparm.1.html) as follows to check your `smb.conf`:
 
 ```shell
 docker compose run samba testparm /usr/local/samba/etc/smb.conf
 ```
 
+### IO and Nice Prioritization
+
+Samba is arguably the most important thing running on my NAS; when I'm browsing files/folders on it, I want it to be _as fast as possible_. To help achieve this I've added the following to the `samba` service in my `docker-compose` file:
+
+```
+    command:
+      - ionice
+      - -c1
+      - -n1
+      - nice
+      - -n-17
+      - /usr/local/samba/sbin/smbd
+      - --foreground
+      - --no-process-group
+      - --configfile
+      - /usr/local/samba/etc/smb.conf
+    cap_add:
+      - CAP_SYS_NICE
+```
+
+This runs `smbd` in the "realtime" IO class, with priority `1` (the possible priorities are `0-7`, with lower numbers being higher priority). To give it priority on the CPU, I also give `smbd` a `nice` value of `-17` (values range down to `-19`, the highest priority).
+
+### Elasticsearch & FSCrawler (for Spotlight support)
+
+tk
+
+also TK: cpu shares for the ES stuff; and (io)nice values for the same.
+
 ## Monitoring with Netdata
 
 tk
+
+## Migrating away from system Samba
+
+TK: necessary if you want samba container to use host networking and listen on 445
+
+```
+apt remove smbclient samba samba-common && apt autoremove
+```
 
 ## See Also
 
