@@ -91,15 +91,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: linux/amd64,linux/arm64
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v3
+      #   with:
+      #     platforms: linux/amd64,linux/arm64
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v3
-      - name: Available platforms
-        run: echo ${{ steps.buildx.outputs.platforms }}
+      # - name: Available platforms
+      #   run: echo ${{ steps.buildx.outputs.platforms }}
 
       - name: Docker meta
         id: docker_meta
@@ -122,34 +122,35 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           builder: ${{ steps.buildx.outputs.name }}
-          push: false
+          push: true
+          # push: false
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
             PROJECT_VERSION=${{ needs.meta.outputs.bin_version }}
             S6_OVERLAY_ARCH=x86_64
 
-      - name: Build (linux/arm64)
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/arm64
-          builder: ${{ steps.buildx.outputs.name }}
-          push: false
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
-          build-args: |
-            PROJECT_VERSION=${{ needs.meta.outputs.bin_version }}
-            S6_OVERLAY_ARCH=aarch64
+      # - name: Build (linux/arm64)
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     platforms: linux/arm64
+      #     builder: ${{ steps.buildx.outputs.name }}
+      #     push: false
+      #     tags: ${{ steps.docker_meta.outputs.tags }}
+      #     labels: ${{ steps.docker_meta.outputs.labels }}
+      #     build-args: |
+      #       PROJECT_VERSION=${{ needs.meta.outputs.bin_version }}
+      #       S6_OVERLAY_ARCH=aarch64
 
-      - name: Push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
+      # - name: Push
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: ${{ steps.docker_meta.outputs.tags }}
 
       - name: Update Docker Hub description
         if: needs.meta.outputs.is_release == 'true'
