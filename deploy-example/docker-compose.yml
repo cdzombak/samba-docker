@@ -13,6 +13,8 @@ services:
         soft: 16384
         hard: 32768
     volumes:
+      - /home/mysystemuser:/home/mysystemuser
+      - /mnt/storage:/mnt/storage
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
       - /etc/group:/etc/group:ro
@@ -20,6 +22,3 @@ services:
       - ./70-smbusers.sh:/etc/cont-init.d/70-smbusers.sh:ro
       - ./smb.conf:/usr/local/samba/etc/smb.conf:ro
       - /var/log/samba-docker:/usr/local/samba/var/log
-      - /home/mysystemuser:/home/mysystemuser
-      - /mnt/storage/general:/mnt/storage/general
-      - /mnt/storage/iCloud-Drive-Mirror:/mnt/storage/iCloud-Drive-Mirror:ro

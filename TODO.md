@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] update config(s), script(s), etc. per my setup
 - [ ] CI (minimal lint; build Docker images)
 - [ ] setup and document netdata/monitoring
 	- [ ] https://learn.netdata.cloud/docs/data-collection/storage,-mount-points-and-filesystems/samba
