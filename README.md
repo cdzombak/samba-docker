@@ -48,7 +48,7 @@ Samba is arguably the most important thing running on my NAS; when I'm browsing 
 
 This runs `smbd` in the "realtime" IO class, with priority `1` (the possible priorities are `0-7`, with lower numbers being higher priority). To give it priority on the CPU, I also give `smbd` a `nice` value of `-17` (values range down to `-19`, the highest priority).
 
-## Migrating away from system Samba
+### Migrating away from system Samba
 
 This is necessary if you want the Samba container to use host networking and listen on port 445 (recommended).
 
