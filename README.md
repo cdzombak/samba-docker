@@ -48,21 +48,6 @@ Samba is arguably the most important thing running on my NAS; when I'm browsing 
 
 This runs `smbd` in the "realtime" IO class, with priority `1` (the possible priorities are `0-7`, with lower numbers being higher priority). To give it priority on the CPU, I also give `smbd` a `nice` value of `-17` (values range down to `-19`, the highest priority).
 
-### Elasticsearch & FSCrawler (for Spotlight support)
-
-*TK*
-
-*TK: cpu shares for the ES stuff; and (io)nice values for the same.*
-
-> [!NOTE]
-> Elasticsearch 8.9.0 and newer **are not compatible with Samba <= 4.18.**. Fixed in 4.19 and 4.20: https://bugzilla.samba.org/show_bug.cgi?id=15611
-
-## Monitoring with Netdata
-
-*TK*
-
-- https://www.netdata.cloud/monitoring-101/samba-monitoring/
-
 ## Migrating away from system Samba
 
 This is necessary if you want the Samba container to use host networking and listen on port 445 (recommended).
@@ -70,6 +55,21 @@ This is necessary if you want the Samba container to use host networking and lis
 ```
 apt remove smbclient samba samba-common && apt autoremove
 ```
+
+### Elasticsearch & FSCrawler (for Spotlight support)
+
+*TK*
+
+*TK: cpu shares for the ES stuff; and (io)nice values for the same.*
+
+> [!NOTE]
+> Elasticsearch 8.9.0 and newer **are not compatible with Samba <= 4.18.** Fixed in 4.19 and 4.20: https://bugzilla.samba.org/show_bug.cgi?id=15611
+
+## Monitoring with Netdata
+
+*TK*
+
+- https://www.netdata.cloud/monitoring-101/samba-monitoring/
 
 ## See Also
 
