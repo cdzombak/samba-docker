@@ -48,7 +48,7 @@ TK
 
 ## Migrating away from system Samba
 
-TK: necessary if you want samba container to use host networking and listen on 445
+This is necessary if you want the Samba container to use host networking and listen on port 445 (recommended).
 
 ```
 apt remove smbclient samba samba-common && apt autoremove
@@ -72,7 +72,7 @@ TK: samba docs in general: smbd, conf, build, general wiki refs
 
 ### Elasticsearch and Spotlight
 
-n.b. Elasticsearch 8.9.0 and newer **are not compatible with Samba**.
+n.b. Elasticsearch 8.9.0 and newer **are not compatible with Samba <= 4.18.**. Fixed in 4.19 and 4.20: https://bugzilla.samba.org/show_bug.cgi?id=15611
 
 TK: spotlight, es, indexers, samba bugs
 
