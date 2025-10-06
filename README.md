@@ -4,7 +4,19 @@ Up-to-date Samba Docker image optimized for NAS file sharing with full macOS Spo
 
 ## Configuration & Usage
 
-TK
+See `deploy-example` for an example `docker-compose.yml` and `smb.conf` setup. Docker Compose is recommended for deployment. Note that you'll need to mount a number of files/directories into the container, in addition to the Samba shares themselves:
+
+```
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - /etc/group:/etc/group:ro
+      - ./10-tz.sh:/etc/cont-init.d/10-tz.sh:ro  # set timezone
+      - ./70-smbusers.sh:/etc/cont-init.d/70-smbusers.sh:ro  # set up SMB users
+      - ./smb.conf:/usr/local/samba/etc/smb.conf:ro  # your smb.conf
+      - /var/log/samba-docker:/usr/local/samba/var/log  # optional: Samba logs
+```
+
+The recommended usage is to remove Samba from the host and allow this container to bind directly to port 445 using host networking.
 
 ### Using `testparm`
 
@@ -38,13 +50,18 @@ This runs `smbd` in the "realtime" IO class, with priority `1` (the possible pri
 
 ### Elasticsearch & FSCrawler (for Spotlight support)
 
-TK
+*TK*
 
-also TK: cpu shares for the ES stuff; and (io)nice values for the same.
+*TK: cpu shares for the ES stuff; and (io)nice values for the same.*
+
+> [!NOTE]
+> Elasticsearch 8.9.0 and newer **are not compatible with Samba <= 4.18.**. Fixed in 4.19 and 4.20: https://bugzilla.samba.org/show_bug.cgi?id=15611
 
 ## Monitoring with Netdata
 
-TK
+*TK*
+
+- https://www.netdata.cloud/monitoring-101/samba-monitoring/
 
 ## Migrating away from system Samba
 
@@ -56,11 +73,7 @@ apt remove smbclient samba samba-common && apt autoremove
 
 ## See Also
 
-TK: raindrop bookmarks
-
 ### Samba
-
-TK: samba docs in general: smbd, conf, build, general wiki refs
 
 - [`smb.conf` reference](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html)
 - [`smbd` reference](https://www.samba.org/samba/docs/current/man-html/smbd.8.html)
@@ -71,10 +84,6 @@ TK: samba docs in general: smbd, conf, build, general wiki refs
 - https://wiki.samba.org/index.php/Configuring_Logging_on_a_Samba_Server
 
 ### Elasticsearch and Spotlight
-
-n.b. Elasticsearch 8.9.0 and newer **are not compatible with Samba <= 4.18.**. Fixed in 4.19 and 4.20: https://bugzilla.samba.org/show_bug.cgi?id=15611
-
-TK: spotlight, es, indexers, samba bugs
 
 - https://wiki.samba.org/index.php/Spotlight_with_Elasticsearch_Backend
 - https://bugzilla.samba.org/show_bug.cgi?id=15511
