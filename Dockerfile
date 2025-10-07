@@ -1,7 +1,7 @@
 FROM ubuntu:24.04
 ARG SAMBA_VERSION=4.23.1
 ARG PROJECT_VERSION=4.23.1-cdz0
-ARG S6_OVERLAY_VER=3.2.1.0
+ARG S6_OVERLAY_VER=3.1.6.2
 ARG S6_OVERLAY_ARCH=x86_64 # aarch64, x86_64
 # https://github.com/just-containers/s6-overlay#which-architecture-to-use-depending-on-your-targetarch
 # ^ is necessary because s6-overlay maintainer is overtly hostile
