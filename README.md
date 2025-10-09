@@ -76,7 +76,7 @@ Note that:
 - Samba does not support authenticating to Elasticsearch via Basic Auth or API Key. You'll need to allow anonymous users to query your fscrawler indexes, and use e.g. Tailscale to lock down access to your Elasticsearch instance.
 - To make things easier, I have disabled HTTPS for my Elasticsearch instance. This is fine for me since it's only accessible over Tailscale; I recommend you do something similar. Otherwise you'll need to set up Samba to trust your Elasticsearch TLS certificate somehow (this might be easy if you let Tailscale handle certificate issuance; otherwise 🤷‍♂️).
 
-The example stack in `deploy-example` handles all of this (except the Tailscale bits). For additional guidance and troubleshooting, see [my blog post on the topic](). (LINK TK)
+The example stack in `deploy-example` handles all of this (except the Tailscale bits). For additional guidance and troubleshooting, see [my blog post on the topic](https://www.dzombak.com/blog/2025/10/setting-up-testing-spotlight-samba-elasticsearch/).
 
 ### See Also
 
