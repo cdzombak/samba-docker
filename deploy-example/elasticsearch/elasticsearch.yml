@@ -1,0 +1,19 @@
+cluster.name: "es-smb-cluster"
+network.host: 0.0.0.0
+
+xpack.security.enabled: true
+
+xpack.security.authc:
+  anonymous:
+    roles: samba
+    authz_exception: true
+
+xpack.security.http.ssl:
+  enabled: false
+
+xpack.security.transport.ssl:
+  enabled: true
+  key: certs/elasticsearch/elasticsearch.key
+  certificate: certs/elasticsearch/elasticsearch.crt
+  certificate_authorities: certs/ca/ca.crt
+  verification_mode: certificate

@@ -1,0 +1,8 @@
+samba:
+  cluster:
+    - monitor
+  indices:
+    - names: ['fscrawler-*']
+      privileges:
+        - read
+        - monitor

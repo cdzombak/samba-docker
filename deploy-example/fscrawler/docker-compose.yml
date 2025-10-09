@@ -1,0 +1,24 @@
+---
+services:
+
+  fscrawler-general:
+    image: dadoonet/fscrawler:2.10-SNAPSHOT
+    container_name: fscrawler-general
+    restart: unless-stopped
+    cpus: 1
+    volumes:
+      - /mnt/storage/general:/mnt/storage/general:ro
+      - ./fscrawler-config/general:/root/.fscrawler/general
+      - /var/log/fscrawler:/usr/share/fscrawler/logs
+    command: general --restart
+
+  fscrawler-mirrors:
+    image: dadoonet/fscrawler:2.10-SNAPSHOT
+    container_name: fscrawler-mirrors
+    restart: unless-stopped
+    cpus: 0.5
+    volumes:
+      - /mnt/storage/mirrors:/mnt/storage/mirrors:ro
+      - ./fscrawler-config/mirrors:/root/.fscrawler/mirrors
+      - /var/log/fscrawler:/usr/share/fscrawler/logs
+    command: mirrors --restart

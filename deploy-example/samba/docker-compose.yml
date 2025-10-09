@@ -6,6 +6,19 @@ services:
     hostname: mynas
     network_mode: host
     restart: always
+    command:
+      - ionice
+      - -c1
+      - -n1
+      - nice
+      - -n-17
+      - /usr/local/samba/sbin/smbd
+      - --foreground
+      - --no-process-group
+      - --configfile
+      - /usr/local/samba/etc/smb.conf
+    cap_add:
+      - CAP_SYS_NICE
     ulimits:
       nofile:
         soft: 16384

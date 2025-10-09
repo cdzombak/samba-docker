@@ -1,0 +1,31 @@
+---
+name: "general"
+fs:
+  url: "/mnt/storage/general"
+  update_rate: "30m"
+  indexed_chars: 10000
+  lang_detect: false
+  continue_on_error: true
+  add_as_inner_object: true
+  follow_symlinks: true
+  excludes:
+    - "*.smbdelete*"
+    - "*/._*"
+    - "*/.git/*"
+    - "*/node_modules/*"
+    - "*/*.app/*"
+    - "*/vendor/github.com/*"
+    - "*/vendor/cloud.google.com/*"
+    - "*/vendor/golang.org/*"
+    - "*/vendor/google.golang.org/*"
+  ocr:
+    language: "eng"
+    enabled: true
+    pdf_strategy: "auto"
+elasticsearch:
+  index: fscrawler-general
+  index_folder: fscrawler-general
+  api_key: "REDACTED"
+  ssl_verification: false
+  nodes:
+    - url: "http://es.tailnet-XXYY.ts.net:9200"

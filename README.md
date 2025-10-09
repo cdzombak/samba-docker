@@ -56,24 +56,7 @@ This is necessary if you want the Samba container to use host networking and lis
 apt remove smbclient samba samba-common && apt autoremove
 ```
 
-### Elasticsearch & FSCrawler (for Spotlight support)
-
-*TK*
-
-*TK: cpu shares for the ES stuff; and (io)nice values for the same.*
-
-> [!NOTE]
-> Elasticsearch 8.9.0 and newer **are not compatible with Samba <= 4.18.** Fixed in 4.19 and 4.20: https://bugzilla.samba.org/show_bug.cgi?id=15611
-
-## Monitoring with Netdata
-
-*TK*
-
-- https://www.netdata.cloud/monitoring-101/samba-monitoring/
-
-## See Also
-
-### Samba
+### See Also
 
 - [`smb.conf` reference](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html)
 - [`smbd` reference](https://www.samba.org/samba/docs/current/man-html/smbd.8.html)
@@ -83,18 +66,41 @@ apt remove smbclient samba samba-common && apt autoremove
 - https://wiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X
 - https://wiki.samba.org/index.php/Configuring_Logging_on_a_Samba_Server
 
-### Elasticsearch and Spotlight
+## Elasticsearch & FSCrawler (for Spotlight support)
+
+To enable macOS Spotlight support, you'll need to set up an Elasticsearch instance and FSCrawler to index your Samba shares. See the `deploy-example/elasticsearch` directory for an example `docker-compose.yml` and configuration files, and `deploy-example/fscrawler` for an example FSCrawler setup.
+
+Note that:
+
+- Recent versions of Elasticsearch are not compatible with Samba. I have had luck using Elasticsearch 8.8.2 specifically.
+- Samba does not support authenticating to Elasticsearch via Basic Auth or API Key. You'll need to allow anonymous users to query your fscrawler indexes, and use e.g. Tailscale to lock down access to your Elasticsearch instance.
+- To make things easier, I have disabled HTTPS for my Elasticsearch instance. This is fine for me since it's only accessible over Tailscale; I recommend you do something similar. Otherwise you'll need to set up Samba to trust your Elasticsearch TLS certificate somehow (this might be easy if you let Tailscale handle certificate issuance; otherwise 🤷‍♂️).
+
+The example stack in `deploy-example` handles all of this (except the Tailscale bits). For additional guidance and troubleshooting, see [my blog post on the topic](). (LINK TK)
+
+### See Also
 
 - https://wiki.samba.org/index.php/Spotlight_with_Elasticsearch_Backend
+- https://fscrawler.readthedocs.io/en/latest
+
+#### Compatibility
+
 - https://bugzilla.samba.org/show_bug.cgi?id=15511
 - https://bugzilla.samba.org/show_bug.cgi?id=15342
 - https://github.com/Ellerhold/fs2es-indexer/issues/27#issuecomment-1676052344
 - https://lists.samba.org/archive/samba/2023-August/246274.html
-- https://fscrawler.readthedocs.io/en/latest
+
+## Monitoring with Netdata
+
+*TK*
+
+### See Also
+
+- https://www.netdata.cloud/monitoring-101/samba-monitoring/
 
 ## License
 
-Original works in this repo are licensed under GPL3; see `LICENSE` in this repo.
+Original works in this repo are licensed under GPL3; see [`LICENSE`](LICENSE) in this repo.
 
 ## Author
 
