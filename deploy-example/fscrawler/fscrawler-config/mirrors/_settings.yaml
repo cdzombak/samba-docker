@@ -24,7 +24,7 @@ fs:
     pdf_strategy: "auto"
 elasticsearch:
   index: fscrawler-mirrors
-  index_folder: fscrawler-mirrors
+  index_folder: fscrawler-mirrors-folders
   api_key: "REDACTED"
   ssl_verification: false
   nodes:

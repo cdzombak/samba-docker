@@ -24,7 +24,7 @@ fs:
     pdf_strategy: "auto"
 elasticsearch:
   index: fscrawler-general
-  index_folder: fscrawler-general
+  index_folder: fscrawler-general-folders
   api_key: "REDACTED"
   ssl_verification: false
   nodes:
