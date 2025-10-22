@@ -9,15 +9,15 @@ fs:
   add_as_inner_object: true
   follow_symlinks: true
   excludes:
-    - "*.smbdelete*"
-    - "*/._*"
-    - "*/.git/*"
+    - "*\\.smbdelete*"
+    - "*/\\._*"
+    - "*/\\.git/*"
     - "*/node_modules/*"
-    - "*/*.app/*"
-    - "*/vendor/github.com/*"
-    - "*/vendor/cloud.google.com/*"
-    - "*/vendor/golang.org/*"
-    - "*/vendor/google.golang.org/*"
+    - "*/*\\.app/*"
+    - "*/vendor/github\\.com/*"
+    - "*/vendor/cloud\\.google\\.com/*"
+    - "*/vendor/golang\\.org/*"
+    - "*/vendor/google\\.golang\\.org/*"
   ocr:
     language: "eng"
     enabled: true
