@@ -80,7 +80,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "curl -s --cacert config/certs/ca/ca.crt http://localhost:9200 | grep -q 'missing authentication credentials'",
+          "curl -s --cacert config/certs/ca/ca.crt http://localhost:9200 | grep -q 'You Know, for Search'",
         ]
       interval: 10s
       timeout: 10s
