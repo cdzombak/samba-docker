@@ -8,9 +8,9 @@ services:
     cpus: 1
     volumes:
       - /mnt/storage/general:/mnt/storage/general:ro
-      - ./fscrawler-config/general:/root/.fscrawler/general
+      - ./fscrawler-config/general:/home/fscrawler/.fscrawler/general
       - /var/log/fscrawler:/usr/share/fscrawler/logs
-    command: general --restart
+    command: general
 
   fscrawler-mirrors:
     image: dadoonet/fscrawler:2.10-SNAPSHOT
@@ -19,6 +19,6 @@ services:
     cpus: 0.5
     volumes:
       - /mnt/storage/mirrors:/mnt/storage/mirrors:ro
-      - ./fscrawler-config/mirrors:/root/.fscrawler/mirrors
+      - ./fscrawler-config/mirrors:/home/fscrawler/.fscrawler/mirrors
       - /var/log/fscrawler:/usr/share/fscrawler/logs
-    command: mirrors --restart
+    command: mirrors
